@@ -40,17 +40,25 @@ keymap = {32: [device1, uinput.ABS_Y, 0,   128], #Up
 #Second dictionary to store state
 isPressed = {}
 
+#counter for activity
+counter = 0
+
 # initialize keys
 for pin in keymap.keys():
   GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
   isPressed[pin] = False
 
 while True:
+  buttonsPressedInLoop = 0
+  buttonsHeldInLoop = 0
   for pin, value in keymap.items():
     if (not isPressed[pin]) and (not GPIO.input(pin)):
       isPressed[pin] = True
       value[0].emit(value[1], value[2])
+      buttonsPressedInLoop += 1
     if isPressed[pin] and GPIO.input(pin):
       isPressed[pin] = False
       value[0].emit(value[1], value[3])
+      buttonsHeldInLoop += 1
+  counter += buttonsPressedInLoop if buttonsPressedInLoop !=0 and buttonsHeldInLoop != 0 else -1
   time.sleep(.01)  # Poll every 10ms (otherwise CPU load gets too high)
