@@ -28,7 +28,9 @@ buttons =["[device1, uinput.ABS_Y, 0,   128], #Up",
           "[device2, uinput.BTN_5, 1,   0]}   #Button 6"]
 
 file=open("config.py", "w")
-file.write("#Keymap\n#List Stricture: uinput name, value when pressed, value when released\nkeymap={")
+file.write("#Keymap\n#List Stricture: uinput name, value when pressed, value when released\n")
+file.write("events = (uinput.BTN_0, uinput.BTN_1, uinput.BTN_2, uinput.BTN_3, uinput.BTN_4, uinput.BTN_5, uinput.ABS_X + (0, 255, 0, 0), uinput.ABS_Y + (0, 255, 0, 0))\ndevice1 = uinput.Device(events)\ndevice2 = uinput.Device(events)\n")
+file.write("keymap={")
 
 for i in pins:
     GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_UP)

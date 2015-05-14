@@ -5,14 +5,9 @@
 import uinput
 import time
 import RPi.GPIO as GPIO
-from config import keymap
+from config import *
 
 GPIO.setmode(GPIO.BOARD)
-
-events = (uinput.BTN_0, uinput.BTN_1, uinput.BTN_2, uinput.BTN_3, uinput.BTN_4, uinput.BTN_5, uinput.ABS_X + (0, 255, 0, 0), uinput.ABS_Y + (0, 255, 0, 0))
-
-device1 = uinput.Device(events)
-device2 = uinput.Device(events)
 
 #Second dictionary to store state
 isPressed = {}
