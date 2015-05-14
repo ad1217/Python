@@ -22,8 +22,7 @@ for button in buttons:
                 print(i)
                 file.write(str(i) + "\n")
                 while not GPIO.input(i):
-                    print "asdifhluiasdhlfkhasldkjfha"
-                    time.sleep(.02)
+                    time.sleep(.01)
                 done = True
                 break
-            time.sleep(.02)
+            time.sleep(.01)
