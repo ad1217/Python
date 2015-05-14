@@ -45,11 +45,6 @@ for pin in keymap.keys():
   GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
   isPressed[pin] = False
 
-# Center joystick
-# syn=False to emit an "atomic" (128, 128) event.
-#device.emit(uinput.ABS_X, 128, syn=False)
-#device.emit(uinput.ABS_Y, 128)
-
 while True:
   for pin, value in keymap.items():
     if (not isPressed[pin]) and (not GPIO.input(pin)):
