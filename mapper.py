@@ -6,9 +6,29 @@ GPIO.setmode(GPIO.BOARD)
 
 pins=[7,8,11,12,13,15,16,18,19,21,22,23,24,26,29,31,32,33,37,38]
 
-buttons=["Up","Down","Left","Right","1","2","3","4","5","6"]
+buttons =["[device1, uinput.ABS_Y, 0,   128], #Up",
+          "[device1, uinput.ABS_Y, 255, 128], #Down",
+          "[device1, uinput.ABS_X, 0,   128], #Left",
+          "[device1, uinput.ABS_X, 255, 128], #Right",
+          "[device1, uinput.BTN_0, 1,   0],   #Button 1",
+          "[device1, uinput.BTN_1, 1,   0],   #Button 2",
+          "[device1, uinput.BTN_2, 1,   0],   #Button 3",
+          "[device1, uinput.BTN_3, 1,   0],   #Button 4",
+          "[device1, uinput.BTN_4, 1,   0],   #Button 5",
+          "[device1, uinput.BTN_5, 1,   0],   #Button 6",
+          "[device2, uinput.ABS_Y, 0,   128], #Up",
+          "[device2, uinput.ABS_Y, 255, 128], #Down",
+          "[device2, uinput.ABS_X, 0,   128], #Left",
+          "[device2, uinput.ABS_X, 255, 128], #Right",
+          "[device2, uinput.BTN_0, 1,   0],   #Button 1",
+          "[device2, uinput.BTN_1, 1,   0],   #Button 2",
+          "[device2, uinput.BTN_2, 1,   0],   #Button 3",
+          "[device2, uinput.BTN_3, 1,   0],   #Button 4",
+          "[device2, uinput.BTN_4, 1,   0],   #Button 5",
+          "[device2, uinput.BTN_5, 1,   0]}   #Button 6"]
 
-file=open("outfile.txt", "w")
+file=open("config.py", "w")
+file.write("#Keymap\n#List Stricture: uinput name, value when pressed, value when released\nkeymap={")
 
 for i in pins:
     GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -20,9 +40,11 @@ for button in buttons:
         for i in pins:
             if (not GPIO.input(i)):
                 print(i)
-                file.write(str(i) + "\n")
+                file.write(str(i) + ": " + button + "\n")
                 while not GPIO.input(i):
                     time.sleep(.01)
                 done = True
                 break
             time.sleep(.01)
+
+file.close()
