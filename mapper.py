@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 import time
 import RPi.GPIO as GPIO
 
@@ -11,11 +11,7 @@ buttons=["Up","Down","Left","Right","1","2","3","4","5","6"]
 file=open("outfile.txt", "w")
 
 for i in pins:
-    try:
-        GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    except:
-        print "ouch", i
-
+    GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 for button in buttons:
     print button
