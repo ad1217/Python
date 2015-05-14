@@ -53,4 +53,4 @@ while True:
     if isPressed[pin] and GPIO.input(pin):
       isPressed[pin] = False
       value[0].emit(value[1], value[3])
-  time.sleep(.02)  # Poll every 20ms (otherwise CPU load gets too high)
+  time.sleep(.01)  # Poll every 10ms (otherwise CPU load gets too high)
