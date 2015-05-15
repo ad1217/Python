@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BOARD)
 
-pins=[7,8,11,12,13,15,16,18,19,21,22,23,24,26,29,31,32,33,37,38]
+pins=[5,7,8,11,12,13,15,16,18,19,21,22,23,24,26,29,31,32,33,37,38,40]
 
 buttons =["[device1, uinput.ABS_Y, 0,   128], #Up",
           "[device1, uinput.ABS_Y, 255, 128], #Down",
@@ -25,11 +25,15 @@ buttons =["[device1, uinput.ABS_Y, 0,   128], #Up",
           "[device2, uinput.BTN_2, 1,   0],   #Button 3",
           "[device2, uinput.BTN_3, 1,   0],   #Button 4",
           "[device2, uinput.BTN_4, 1,   0],   #Button 5",
-          "[device2, uinput.BTN_5, 1,   0]}   #Button 6"]
+          "[device2, uinput.BTN_5, 1,   0],   #Button 6",
+          "[device1, uinput.BTN_6, 1,   0],   #1p Start",
+          "[device1, uinput.BTN_7, 1,   0],   #2p Start",
+          "[device1, uinput.BTN_8, 1,   0],   #1p coin",
+          "[device1, uinput.BTN_9, 1,   0]}   #2p coin"]
 
 file=open("config.py", "w")
-file.write("#Keymap\n#List Stricture: uinput name, value when pressed, value when released\n")
-file.write("events = (uinput.BTN_0, uinput.BTN_1, uinput.BTN_2, uinput.BTN_3, uinput.BTN_4, uinput.BTN_5, uinput.ABS_X + (0, 255, 0, 0), uinput.ABS_Y + (0, 255, 0, 0))\ndevice1 = uinput.Device(events)\ndevice2 = uinput.Device(events)\n")
+file.write("import uinput\n#Keymap\n#List Stricture: uinput name, value when pressed, value when released\n")
+file.write("events = (uinput.BTN_0, uinput.BTN_1, uinput.BTN_2, uinput.BTN_3, uinput.BTN_4, uinput.BTN_5, uinput.BTN_6, uinput.BTN_7, uinput.BTN_8, uinput.BTN_9, uinput.ABS_X + (0, 255, 0, 0), uinput.ABS_Y + (0, 255, 0, 0))\ndevice1 = uinput.Device(events)\ndevice2 = uinput.Device(events)\n")
 file.write("keymap={")
 
 for i in pins:
