@@ -17,12 +17,16 @@ for pin in keymap.keys():
   GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
   isPressed[pin] = False
 
+def checkPressed (state, key, value):
+  value[0].emit(value[1], value[2])
+  if (not isPressed[key]) and state:
+    isPressed[key] = True
+    value[0].emit(value[1], value[2])
+  if isPressed[key] and (not state):
+    isPressed[key] = False
+    value[0].emit(value[1], value[3])
+
 while True:
-  for pin, value in keymap.items():
-    if (not isPressed[pin]) and (not GPIO.input(pin)):
-      isPressed[pin] = True
-      value[0].emit(value[1], value[2])
-    if isPressed[pin] and GPIO.input(pin):
-      isPressed[pin] = False
-      value[0].emit(value[1], value[3])
+  for key, value in keymap.items():
+    checkPressed((not GPIO.input(key)), key, value)
   time.sleep(.01)  # Poll every 10ms (otherwise CPU load gets too high)
